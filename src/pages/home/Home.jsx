@@ -39,7 +39,7 @@ function Home() {
   return (
     <div>
       {posts.map(post=>(
-        <div className='flex mt-32 even:flex-row-reverse' key={post.id}>
+        <div className='flex mt-32 even:flex-row-reverse first:mt-20' key={post.id}>
           <img src={post.img} alt="thumb" className='w-96'/>
           <div className="flex flex-col ml-10 mr-10 justify-between">
             <Link to={`/post/${post.id}`}><h1 className='font-bold text-2xl'>{post.title}</h1></Link>
