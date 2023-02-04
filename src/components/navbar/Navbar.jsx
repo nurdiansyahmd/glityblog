@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logo from '../../assets/logo.png'
 import 'flowbite'
+import { AuthContext } from '../../context/AuthContext'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
+  const {currentUser, logout} = useContext(AuthContext)
+
   return (
     <>
     <nav className="bg-white border-gray-200 py-4 rounded dark:bg-gray-900">
@@ -33,19 +37,20 @@ function Navbar() {
             </li>
             <li>
               <a href="/?cat=food" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#02a8ae] font-semibold md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">FOOD</a>
-            </li>           
-            <li>
+            </li> 
+            {currentUser ?          
+            (<li>
               <div className="flex items-center ml-5 md:order-2">
                 <button type="button" className="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                   <span className="sr-only">Open user menu</span>
                   <img className="w-8 h-8 rounded-full" src='https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt="user" />
                 </button>
-                <span className='ml-3 font-bold'>John Doe</span>
+                <span className='ml-3 font-bold'>{currentUser?.username}</span>
                 {/* Dropdown menu */}
-                <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+                <div className="z-50 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
                   <div className="px-4 py-3">
-                    <span className="block text-sm text-gray-900 dark:text-white">John Doe</span>
-                    <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">johndoe@gmail.com</span>
+                    <span className="block text-sm text-gray-900 dark:text-white">{currentUser?.username}</span>
+                    <span className="block text-sm font-medium text-gray-500 truncate dark:text-gray-400">{currentUser?.email}</span>
                   </div>
                   <ul className="py-2" aria-labelledby="user-menu-button">
                     <li>
@@ -55,12 +60,16 @@ function Navbar() {
                       <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
                     </li>
                     <li>
-                      <a href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</a>
+                        <Link to={'/'}>
+                        <span onClick={logout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Logout</span>
+                        </Link>
                     </li>
                   </ul>
                 </div>
               </div>
-            </li>
+            </li>)
+              : (<li><Link to="/login">Login</Link></li>) 
+              }        
           </ul>
         </div>
       </div>

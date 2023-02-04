@@ -1,40 +1,59 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 function Home() {
+  const [posts, setPosts] = useState([])
+  const cat = useLocation().search
 
-  const posts = [
-    {
-      id: 1,
-      title: 'Lorem ipsum dolor sit amet repellat?',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
-      img: 'https://images.pexels.com/photos/265129/pexels-photo-265129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    {
-      id: 2,
-      title: 'Lorem ipsum elit. Optio id vitae eius.',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
-      img: 'https://images.pexels.com/photos/4491459/pexels-photo-4491459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-    },
-    {
-      id: 3,
-      title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
-      img: 'https://images.pexels.com/photos/1181615/pexels-photo-1181615.jpeg?auto=compress&cs=tinysrgb&w=1600'
-    },
-    {
-      id: 4,
-      title: 'Lorem ipsum dolor sit, Explicabo.',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
-      img: 'https://images.pexels.com/photos/235294/pexels-photo-235294.jpeg?auto=compress&cs=tinysrgb&w=1600'
-    },
-    {
-      id: 5,
-      title: 'Lorem ipsum dolor sit amet consectetur adipisicing.',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
-      img: 'https://images.pexels.com/photos/773471/pexels-photo-773471.jpeg?auto=compress&cs=tinysrgb&w=1600'
-    },
-  ]
+  console.log(cat);
+
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      try {
+        const res = await axios.get(`/posts${cat}`)
+        setPosts(res.data)
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    fetchData()
+  }, [cat])
+
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: 'Lorem ipsum dolor sit amet repellat?',
+  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
+  //     img: 'https://images.pexels.com/photos/265129/pexels-photo-265129.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Lorem ipsum elit. Optio id vitae eius.',
+  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
+  //     img: 'https://images.pexels.com/photos/4491459/pexels-photo-4491459.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
+  //     img: 'https://images.pexels.com/photos/1181615/pexels-photo-1181615.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Lorem ipsum dolor sit, Explicabo.',
+  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
+  //     img: 'https://images.pexels.com/photos/235294/pexels-photo-235294.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  //   },
+  //   {
+  //     id: 5,
+  //     title: 'Lorem ipsum dolor sit amet consectetur adipisicing.',
+  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto repudiandae totam accusamus, sit optio odit nobis, harum reprehenderit vero, veniam quo ipsa repellendus perferendis laborum.',
+  //     img: 'https://images.pexels.com/photos/773471/pexels-photo-773471.jpeg?auto=compress&cs=tinysrgb&w=1600'
+  //   },
+  // ]
 
   return (
     <div>
