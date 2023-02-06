@@ -43,7 +43,7 @@ function Navbar() {
               <div className="flex items-center ml-5 md:order-2">
                 <button type="button" className="flex text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
                   <span className="sr-only">Open user menu</span>
-                  <img className="w-8 h-8 rounded-full" src='https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' alt="user" />
+                  <img className="w-8 h-8 rounded-full" src={currentUser?.img} alt="user" />
                 </button>
                 <span className='ml-3 font-bold'>{currentUser?.username}</span>
                 {/* Dropdown menu */}
