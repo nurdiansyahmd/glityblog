@@ -51,7 +51,7 @@ function Single() {
               <p className='font-bold'>{post.username}</p>
               <div className="flex flex-row gap-3 items-center">
                 <p>Posted {moment(post.date).fromNow()}</p>
-                {currentUser.username === post.username && (
+                {currentUser !== null && (
                   <>
                   <div>
                   <Link to={`/write?edit=2`} state={post}>
