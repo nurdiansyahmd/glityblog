@@ -41,7 +41,7 @@ function Single() {
   }
 
   return (
-    <div className='flex flex-row mt-10'>
+    <div className='flex flex-row mt-10 h-[900px]'>
       <div className='basis-[70rem]'>
         <div className="flex flex-col">
           <img src={`../upload/${post?.img}`} className='h-96 w-full object-cover' alt="thumb" />
